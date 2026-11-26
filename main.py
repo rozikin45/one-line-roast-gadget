@@ -15,6 +15,11 @@ LINE = (
 
 
 def main() -> None:
+    # Enforce the competition gate before writing: 1-200 chars, one line,
+    # not only whitespace. Failing fast here keeps an invalid entry from
+    # ever reaching the judge.
+    assert 1 <= len(LINE) <= 200, f"line is {len(LINE)} chars, gate is 1-200"
+    assert "\n" not in LINE and LINE.strip(), "line must be one non-blank line"
     out_dir = Path("/output")
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / "entry.txt"
